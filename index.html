@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Career Sensei — AI is changing your career</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --bg-elevated: #F1F0ED;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,11,0.09);
+    --border-strong: rgba(10,10,11,0.16);
+    --ink: #17171A;
+    --ink-muted: #6B6A70;
+    --ink-faint: #9C9BA3;
+    --accent: #6A5CE0;
+    --accent-soft: rgba(106,92,224,0.10);
+    --ink-on-dark: #FAFAF8;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  .glow {
+    position: fixed;
+    top: -220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(ellipse at center, rgba(106,92,224,0.12) 0%, rgba(106,92,224,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .header-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .header-mark svg { display: block; }
+
+  .header-name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: clamp(32px, 6.5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+
+  .why {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 58ch;
+    margin: 0 0 56px;
+  }
+
+  .why strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .why-block {
+    max-width: 58ch;
+    margin: 0 0 56px;
+  }
+
+  .why-block p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+
+  .why-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .why-block strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+  }
+
+  .doors {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+
+  .door {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .door:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .door-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .door-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .door-body {
+    padding: 18px 20px 22px;
+  }
+
+  .door-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .door-hook {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .footer-line {
+    font-size: 13px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-bottom: 40px;
+  }
+
+  /* Contact form */
+  .contact {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
+  }
+
+  .contact h2 {
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .contact p.sub {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin: 0 0 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin: 16px 0 6px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  textarea { resize: vertical; min-height: 84px; }
+
+  input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .mobile-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .country-code-fixed {
+    flex: 0 0 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-elevated);
+    color: var(--ink-muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .mobile-row input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  button.submit {
+    margin-top: 22px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--ink-on-dark);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  button.submit:hover { opacity: 0.88; }
+  button.submit:disabled { opacity: 0.5; cursor: default; }
+
+  .status {
+    font-size: 13px;
+    margin-top: 14px;
+    display: none;
+  }
+
+  .status.ok { color: #2E9E58; display: block; }
+  .status.err { color: #C24545; display: block; }
+
+  .disclaimer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-faint);
+    max-width: 60ch;
+  }
+
+  @media (min-width: 640px) {
+    .doors { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9.5" stroke="#FAFAF8" stroke-width="1.4"/>
+        <path d="M15.5 8.5L13 13L8.5 15.5L11 11L15.5 8.5Z" fill="#FAFAF8"/>
+      </svg>
+    </div>
+    <div class="header-name">The Career Sensei</div>
+  </div>
+
+  <h1>AI is changing your career. Pick where you need help.</h1>
+  <div class="section-label" style="margin-bottom: 10px;">Why I created this</div>
+  <div class="why-block">
+    <p>I spend a lot of time advising and coaching people, for free, about how AI is going to change their career. I love those conversations, and they have been grateful about going places.</p>
+    <p>But I've realised that time is worth protecting rather than giving away indefinitely.</p>
+    <p>The Career Sensei is my way of keeping that door open. 🚪</p>
+    <p>If you are without a job and looking for one, I will do this for free. 🤝</p>
+    <p>If not, I will do it at <strong>a small fee that respects both sides</strong>, rather than closing it entirely.</p>
+    <p>Not a business, just a better way to keep helping. 🙌</p>
+  </div>
+
+  <div class="section-label">Where to start</div>
+  <div class="doors">
+    <a class="door" href="#contact" onclick="preselect('Career Coaching')">
+      <div class="door-image">
+      	<img src="AI-Career-Coaching.jpg"/>
+      </div>
+      <div class="door-body">
+        <div class="door-title">Career Coaching</div>
+        <div class="door-hook">Where does AI put you in two years?</div>
+      </div>
+    </a>
+    <a class="door" href="#contact" onclick="preselect('Profile Rebuild')">
+      <div class="door-image">
+      	<img src="Resume-Building.jpg"/>
+      </div>
+      <div class="door-body">
+        <div class="door-title">Profile Rebuild</div>
+        <div class="door-hook">Make your resume sound AI-fluent.</div>
+      </div>
+    </a>
+    <a class="door" href="#contact" onclick="preselect('AI Tooling Coach')">
+      <div class="door-image">
+      	<img src="AI-Tooling.jpg"/>
+      </div>
+      <div class="door-body">
+        <div class="door-title">AI Tooling Coach</div>
+        <div class="door-hook">Learn the tools. Save real hours.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer-line">17+ years in tech leadership, now pointed at your career.</div>
+
+  <div class="contact" id="contact">
+    <h2>Pick one, then book a call</h2>
+    <p class="sub">Send a note and I'll reply to set up a time.</p>
+    <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D2v000001vCaL" method="POST" target="hidden_iframe" onsubmit="onLeadSubmit()">
+
+      <input type="hidden" name="oid" value="00D2v000001vCaL">
+      <input type="hidden" name="retURL" value="http://google.com">
+      <input type="hidden" name="lead_source" value="Web">
+
+      <label for="last_name">Name</label>
+      <input type="text" id="last_name" name="last_name" maxlength="80" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" maxlength="80" required>
+
+      <label for="mobile">Mobile number</label>
+      <div class="mobile-row">
+        <div class="country-code-fixed">🇦🇺 +61</div>
+        <input type="tel" id="mobile" name="mobile" maxlength="40" placeholder="412 345 678">
+      </div>
+
+      <label for="description">A line on what you need</label>
+      <textarea id="description" name="description" placeholder="e.g. I'm a product manager worried AI will change my role..."></textarea>
+
+      <button type="submit" class="submit" id="submitBtn">Send</button>
+      <div class="status" id="statusMsg"></div>
+    </form>
+  </div>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <div class="disclaimer">
+    The Career Sensei is a personal side project run independently in my own time. It is not affiliated with, endorsed by, or connected to my employer in any way. Views, advice, and services offered here are entirely my own and do not represent my employer's positions, products, or services.
+  </div>
+
+</div>
+
+<script>
+  function preselect(service) {
+    const description = document.getElementById('description');
+    if (description && !description.value) {
+      description.value = "Interested in: " + service + ". ";
+      description.focus();
+    }
+  }
+
+  const form = document.getElementById('leadForm');
+  const statusMsg = document.getElementById('statusMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const countryCode = "+61";
+
+  function onLeadSubmit() {
+    // Prefix the mobile number with the fixed country code before it's posted to Salesforce.
+    const mobileInput = document.getElementById('mobile');
+    if (mobileInput && mobileInput.value && mobileInput.value.trim().indexOf(countryCode) !== 0) {
+      mobileInput.value = countryCode + " " + mobileInput.value.trim();
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    // The actual submission posts to Salesforce inside the hidden iframe, so the page never
+    // navigates away. We can't read a real success/failure response back (cross-origin), so we
+    // optimistically confirm after a short delay, matching how Salesforce's own snippet behaves.
+    setTimeout(function () {
+      statusMsg.textContent = "Thanks — I'll be in touch shortly.";
+      statusMsg.className = 'status ok';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send';
+      form.reset();
+    }, 900);
+
+    return true;
+  }
+</script>
+
+
+</body>
+</html>
