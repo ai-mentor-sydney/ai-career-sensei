@@ -214,14 +214,6 @@
     line-height: 1.5;
   }
 
-  .footer-line {
-    font-size: 13px;
-    color: var(--ink-faint);
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    margin-bottom: 40px;
-  }
-
   /* Contact form */
   .contact {
     background: var(--bg-card);
@@ -322,10 +314,26 @@
   .status.ok { color: #2E9E58; display: block; }
   .status.err { color: #C24545; display: block; }
 
-  .disclaimer {
+  .about-me {
     margin-top: 56px;
     padding-top: 24px;
     border-top: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 60ch;
+  }
+
+  .about-me a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 2px;
+  }
+
+  .disclaimer {
+    margin-top: 16px;
     font-size: 12px;
     line-height: 1.6;
     color: var(--ink-faint);
@@ -391,8 +399,6 @@
     </a>
   </div>
 
-  <div class="footer-line">17+ years in tech leadership, now pointed at your career.</div>
-
   <div class="contact" id="contact">
     <h2>Pick one, then book a call</h2>
     <p class="sub">Send a note and I'll reply to set up a time.</p>
@@ -424,8 +430,12 @@
 
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
+  <div class="about-me">
+    About me: <a href="https://suricm.github.io/suri-demos/suri-cm-portfolio.html" target="_blank" rel="noopener">Suri CM</a> | 17+ years in tech leadership, now pointed at your career.
+  </div>
+
   <div class="disclaimer">
-    The Career Sensei is a personal side project run independently in my own time. It is not affiliated with, endorsed by, or connected to my employer in any way. Views, advice, and services offered here are entirely my own and do not represent my employer's positions, products, or services.
+    Disclaimer: The Career Sensei is a personal side project run independently in my own time. It is not affiliated with, endorsed by, or connected to my employer in any way. Views, advice, and services offered here are entirely my own and do not represent my employer's positions, products, or services.
   </div>
 
 </div>
